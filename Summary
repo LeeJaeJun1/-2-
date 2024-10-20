@@ -134,3 +134,66 @@ int main() {
     cout << a << endl;
 }
 */
+
+/* class - 여러 개의 멤버함수 기능을 가지고 있다.
+#include<iostream>
+#include<string>
+using namespace std;
+
+class Student {
+private:
+    int _id;
+    string _name;
+public:
+    Student(int id, string name) {
+        _id = id;
+        _name = name;
+    }
+    string getInfor() {
+        return _name + to_string(_id); //to_string : int를 string으로 변경해주는 함수
+    }
+};
+
+int main() {
+    Student s1{1, "pby"};
+    cout << s1.getInfor() << endl;
+    Student s2{2, "wook"};
+    cout << s2.getInfor() << endl;
+}
+*/
+
+/* class
+#include<iostream>
+#include<string>
+using namespace std;
+
+class Student {
+private:
+    string name;
+    string birth;
+    int score1; int score2; int score3;
+    int height; double average;
+public:
+    Student(string n, string b, int s1, int s2, int s3, int h) {
+        name = n;
+        birth = b;
+        score1 = s1;
+        score2 = s2;
+        score3 = s3;
+        height = h;
+    }
+    void avg() {
+        average = (score1 + score2 + score3) / 3.0;
+    }
+    void print() {
+        cout << birth << " " << average << " " << height << endl;
+    }
+};
+
+int main() {
+    Student st1{"pby", "0212", 99, 95, 94, 158};
+    Student st2{"dlwlrma", "0516", 97, 94, 97,162};
+    st1.avg(); st1.print();
+    st2.avg(); st2.print();
+}
+ */
