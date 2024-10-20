@@ -1,0 +1,136 @@
+/*range-based-for
+
+#include <iostream>
+#include<array>
+using namespace  std;
+
+int main() {
+    array<int, 5> items{1,2,3,4,5};
+
+    cout << "items before modification: ";
+    for(int item: items) {
+        cout << item << " ";
+    }
+
+    // &참조자 : 대상에게 또 다른 이름 붙여주는 것
+    // 하나의 메모리 공간에 이름이 2개 생기게 되고 이 둘의 주소 값 같다.
+    for(int& itemRef : items) {
+        itemRef *= 2;
+    }
+
+    cout << "\nitems after modification: ";
+    for(int item : items) {
+        cout << item << " ";
+    }
+    cout << endl;
+}
+*/
+
+/* recursive function
+#include<iostream>
+#include<iomanip>
+using namespace  std;
+
+unsigned long factorial(unsigned long number) {
+    if(number <= 1 ) {
+        return 1;
+    }
+    else{
+        return number * factorial(number-1);
+    }
+}
+
+int main() {
+    for(unsigned int counter{0}; counter<=10; ++counter) {
+        cout << setw(2) << counter << " ! = " << factorial(counter)
+        << endl;
+    }
+}
+*/
+
+/* array
+#include<iostream>
+#include<iomanip>
+#include<array>
+using namespace std;
+
+int main() {
+    array<int, 5> n; //
+
+    for(size_t i{0}; i< n.size(); i++) {
+        n[i] = 0;
+    }
+
+    cout << "Element" << setw(10) << "Value" << endl;
+
+    for(size_t j{0}; j < n.size(); j++) {
+        cout << setw(7) << j << setw(10) << n[j] << endl;
+    }
+}
+*/
+
+/* array
+#include<iostream>
+#include<array>
+using namespace std;
+
+int main() {
+    const size_t arraySize{4}; // const : 그 값을 변경하지 않는 상수를 의미
+    array<int, arraySize> a{10,20,30,40};
+    int total{0};
+
+    for(size_t i{0}; i < a.size(); i++) {
+        total += a[i];
+    }
+
+    cout << "Total of array elements: " << total << endl;
+}
+*/
+
+/*
+#include<iostream>
+using namespace std;
+
+reference
+int main() {
+    int a = 5;
+    int& ref = a;
+    ref += 2;
+    cout << a << endl;
+    cout << ref << endl;
+}
+pointer
+int main() {
+  int a = 5;
+  int* ptr = &a;
+  *ptr += 2;
+  cout << a << endl;
+  cout << ptr << endl; // 메모리주소
+  cout << *ptr << endl; // 포인터가 참조하고 있는 대상을 의미
+}
+*/
+
+/* passing arguments to function
+#include<iostream>
+using namespace std;
+
+int add1(int n) {
+    return n+2;
+}
+
+void add2(int& r) {
+    r += 2;
+}
+
+void add3(int *p) {
+    *p += 2;
+}
+
+int main() {
+    int a = 5;
+    add1(a); // 값만 복사되는 것이지, 원본 a의 값을 변경할 수 없다.
+    add2(a); // reference
+    add3(&a); // pointer
+    cout << a << endl;
+}
+*/
