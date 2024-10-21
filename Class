@@ -1,0 +1,202 @@
+// 10/21
+/* get, set
+#include<iostream>
+using namespace std;
+
+class Tmp {
+public:
+    void setA(int a) {
+        _a = a;
+    }
+    int getA() const {
+        return _a;
+    }
+private:
+    int _a;
+};
+
+int main() {
+    Tmp t;
+    t.setA((5));
+    cout << t.getA() << endl;
+}
+ */
+
+/*
+#include<iostream>
+#include<string>
+using namespace std;
+
+class Student {
+private:
+    int _id;
+    string _name;
+
+    void makeID() {
+        _id += 12220000; // 클래스 내부에서 내부연산을 위한 것은 prviate에
+    }
+public:
+    Student(int id, string name)
+        : _id{id}, _name{name} {
+        cout << "parameter constructor: " << _id << " " << _name << endl;
+        makeID();
+    }
+    int getID() const {
+        return _id;
+    }
+};
+
+int main() {
+    Student s1{1234, "pby"};
+    cout << s1.getID() << endl;
+
+    return 0;
+}
+ */
+
+/*
+#include<iostream>
+#include<stdexcept>
+#include<iomanip>
+#include<sstream>
+#include<string>
+
+using namespace std;
+class Time {
+public:
+    void setTime(int h, int m, int s) {
+        if((h >= 0 && h < 24) && (m>=0 && m < 60) && (s>=0 && s < 60)) {
+            hour = h;
+            minute = m;
+            second = s;
+        }
+        else{
+            throw invalid_argument("hour, minute and/or second was out of range"); // throw : 예외가 발생했다는 문장구성
+        }
+    }
+    string toUniversalString() const {
+        ostringstream output; // ostringstream : string 조립
+        output << setfill('0') << setw(2) << hour << ":" << setw(2) << minute << ":" << setw(2) << second;\
+        return output.str();
+    }
+    string toStandardString() const {
+        ostringstream output; // ? : 삼항연산자
+        output << ((hour == 0 || hour == 12) ? 12 : hour % 12) << ":" << setfill('0') << setw(2) << minute
+        << ":" << setw(2) << second << (hour < 12 ? " AM" : " PM");
+        return output.str();
+    }
+private:
+    unsigned int hour{0};
+    unsigned int minute{0};
+    unsigned int second{0};
+};
+
+void displayTime(const string& message, const Time& time) {
+    cout << message << "\nUniversal time: " << time.toUniversalString()
+    << "\nStand time: " << time.toStandardString() << "\n\n";
+}
+
+int main() {
+    Time t;
+
+    displayTime("Initial time:", t);
+    t.setTime(13,27,6);
+    displayTime("After setTime", t);
+
+    try{ // 예외 발생에 대한 검사 범위 지정
+        t.setTime(99,99,99);
+    }
+    catch(invalid_argument& e) { // try 블록에서 발생한 예외 처리하는 코드
+        cout << "Exception: " << e.what() << "\n\n";
+    }
+
+    displayTime("After attempting to set an invalid time: " ,t);
+}
+*/
+/*
+#include<iostream>
+#include<string>
+using namespace std;
+
+class Student {
+private:
+    int _id;
+    string _name;
+public:
+    Student() // 기본 생성자
+    : _id{0}, _name{"noname"} {
+        cout << "default constructor: " << _id << " " << _name << endl;
+    }
+    Student(int id, string name)
+    : _id{id}, _name{name} {
+        cout << "parameter constructor: " << _id << " " << _name << endl;
+    }
+    Student(const Student& origin)
+    : _id(origin._id), _name{origin._name} {
+        cout << "copy constructor: " << _id << " " << _name << endl;
+    }
+};
+
+int main() {
+    Student s1;
+    Student s2{1, "pby"};
+    Student s3{s2};
+}
+*/
+
+/*
+#include<iostream>
+#include<string>
+using namespace std;
+
+class Student {
+private:
+    int _id;
+    string _name;
+public:
+    Student(int id, string name) {
+        _id = id;
+        _name = name;
+        cout << "parameter constructor: " << _id << " " << _name << endl;
+    }
+    ~Student() {
+        cout << "destructor: " << _id << " " << _name << endl;
+    }
+};
+
+int main() {
+    Student s1{1, "pby"};
+    Student s2{2, "wook"};
+
+    return 0;
+}
+ */
+/* composition
+#include<iostream>
+#include<string>
+using namespace std;
+
+class Phone {
+public:
+    Phone(string n) { cout << "Phone constructor" << endl;}
+    ~Phone() {cout << "phone destructor" << endl;}
+private:
+    string _name;
+};
+
+class Person {
+public:
+    Person(string n, Phone& p) : _name{n}, _phone{p} {
+        cout << "Person constructor" << endl;
+    }
+    ~Person() {cout << "Person destructor" << endl;}
+private:
+    string _name;
+    const Phone _phone; // composition, 멤버변수로 다른 타입의 객체 가지고 있다.
+};
+
+int main() {
+    Phone ip{"iphone 12"};
+    Person psn{"pby", ip};
+} // phone 생성자, person 생성자, person 소멸자, person클래스 멤버변수 phone 객체 소멸, main함수의 ip 소멸
+ */
