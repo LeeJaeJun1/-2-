@@ -200,3 +200,175 @@ int main() {
     Person psn{"pby", ip};
 } // phone 생성자, person 생성자, person 소멸자, person클래스 멤버변수 phone 객체 소멸, main함수의 ip 소멸
  */
+
+// 10/22
+/* friend
+
+#include<iostream>
+using namespace std;
+
+class Count {
+    friend void setX(Count&, int);
+public:
+    int getX() const {return x;}
+private:
+    int x{0};
+};
+void setX(Count& c, int val) {
+    c.x = val;
+}
+int main() {
+    Count counter;
+
+    cout << "counter.x" <<counter.getX() << endl;
+    setX(counter, 8);
+    cout << "counter.x after" << counter.getX() << endl;
+}
+*/
+
+/* this
+#include<iostream>
+#include<string>
+using namespace std;
+
+class Student {
+private:
+    int id;
+    string name;
+private:
+    int num;
+public:
+    Student(int id, string name)
+    : id{id} {
+        this->name = name;
+    }
+    void display(string name) const {
+        cout << name << endl;
+        cout << this->name << endl;
+    }
+};
+
+int main() {
+    Student s{1, "pby"};
+    s.display("dlwlrma");
+}
+ */
+
+/*
+#include<iostream>
+using namespace std;
+
+class Test {
+public:
+
+    explicit Test(int);
+
+    void print() const;
+
+private:
+    int x{0};
+};
+
+Test::Test(int value) : x{value} {}
+
+void Test::print() const {
+    cout << "       x = " << x;
+    cout << "\n     this->x= " << this->x;
+    cout << "\n(*this).x=    " << (*this).x << endl;
+}
+
+int main() {
+    Test testObject{12};
+    testObject.print();
+}
+ */
+
+/*
+#include<iostream>
+#include<string>
+using namespace std;
+
+class Student {
+private:
+    int id;
+    string name;
+    static int countTotal;
+public:
+    Student(int id, string name)
+    : id{id}, name{name} {
+        countTotal++;
+    }
+    static int getCountTotal() { // static member에 접근 가능
+        return countTotal;
+    }
+};
+int Student::countTotal{0};
+int main() {
+    Student s1{1, "pby"};
+    Student s2{2, "wook"};
+    cout << Student::getCountTotal() << endl; // 객체를 생성하지 않고 호출 가능
+    return 0;
+}
+ */
+
+/* 동적 할당
+#include<iostream>
+using namespace std;
+
+class Tmp{
+    int a[1000];
+};
+
+int main() {
+    int a{5};
+    int* ptr1{new int{5}};
+    Tmp* ptr2;
+    ptr2 = new Tmp;
+    int arr[3] {};
+    int* ptr3 = new int[3]{4,5,6};
+
+    delete ptr1;
+    delete ptr2;
+    delete[] ptr3;
+}
+ */
+
+/* 동적할당 : stack에 있는 모두 날라가지만(new연산자 포인터 리턴), heap에 모든 메모리 남아있음. 하지만 heap 자료는 이름이 없다 그래서 직접 사용불가
+ * 따라서 포인터로 연결해서 간접적으로 사용한다. 포인터를 사용하지 않으면 메모리 주소값 나온다.
+#include<iostream>
+using namespace std;
+int main() {
+    int size;
+    cin >> size;
+
+    int* p{new int[size] {} };
+
+    for(int i{0}; i < size; ++i) {
+        cout << p[i] << endl;
+    }
+    delete[] p;
+}
+ */
+
+/*
+#include<iostream>
+using namespace std;
+
+int main() { // shallow copy : 얕은 복사, 메모리 주소만 복사된다. 포인터 이용해서 메모리 주소만 복사
+    int *p1{new int{5}};
+    int *p2 = p1;
+    cout << *p1 << "   " << p1 << endl;
+    cout << *p2 << "   " << p2 << endl;
+    delete p1;
+    cout << *p2 << "   " << p2 << endl;
+}
+
+int main() { // deep copy : 깊은 복사, 포인터 이용해서 값까지 복사
+    int *p1{new int{5}};
+    int *p2{new int{*p1}};
+    cout << *p1 << "   " << p1 << endl;
+    cout << *p2 << "   " << p2 << endl;
+    delete p1;
+    cout << *p2 << "   " << p2 << endl;
+}
+*/
